@@ -10,7 +10,7 @@ A Python and Qt6-based desktop application designed to simplify the process of c
 - Status: ![Status](https://img.shields.io/badge/status-stable-brightgreen.svg) ![Status](https://img.shields.io/badge/status-actively%20developed-green.svg)
 
 ### Used Technologies
-- Python 3.14 ![tech](https://img.shields.io/badge/code-Python-blue?logo=python&logoColor=white)
+- Python 3.14 ![tech](https://img.shields.io/badge/code-Python%203.14-blue?logo=python&logoColor=white)
 - Qt6 via PySide6 ![Qt6](https://img.shields.io/badge/framework-Qt6-41CD52?logo=qt&logoColor=white)
 - Pillow Library ![Pillow](https://img.shields.io/badge/library-Pillow-3776AB?logo=python&logoColor=white)
 
