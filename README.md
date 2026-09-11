@@ -1,8 +1,15 @@
-**Project Name: Compress File**
-Proyek ini adalah aplikasi desktop berbasis Python dan Qt6 untuk mengompresi file foto. Tujuannya adalah untuk menginisiasi kompresi secara lokal untuk mengecilkan file foto yang Anda miliki dengan mudah tanpa perlu pengetahuan teknis. 
+**Compress File**
+A Python and Qt6-based desktop application designed to simplify the process of compressing photos locally. It is built to be easy for anyone to use, without requiring specialized technical knowledge. Key features:
+- **Secure Local Compression**: The entire process takes place on your device, eliminating the need to upload files.
+- **Modern Interface**: Built with Qt6 to deliver a lightweight, responsive, and user-friendly UI.
+- **High Performance**: Optimized with parallel processing for rapid compression.
+- **Cross-Platform**: Runs seamlessly on Windows and Linux operating systems.
 
 **Project Identity**
-- Lisensi: ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
+- License: ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 - Status: ![Status](https://img.shields.io/badge/status-stable-brightgreen.svg) ![Status](https://img.shields.io/badge/status-development-orange.svg)
 
-- Teknologi Utama = ![tech](https://img.shields.io/badge/code-Python-blue?logo=python&logoColor=white) ![Qt6](https://img.shields.io/badge/framework-Qt6-41CD52?logo=qt&logoColor=white&style=for-the-badge) ![Pillow](https://img.shields.io/badge/library-Pillow-3776AB?logo=python&logoColor=white&style=for-the-badge)
+**Used Technologies**
+![tech](https://img.shields.io/badge/code-Python-blue?logo=python&logoColor=white) ![Qt6](https://img.shields.io/badge/framework-Qt6-41CD52?logo=qt&logoColor=white&style=for-the-badge) ![Pillow](https://img.shields.io/badge/library-Pillow-3776AB?logo=python&logoColor=white&style=for-the-badge)
+
+**Binary Releases:** Not currently available. Coming soon. 
