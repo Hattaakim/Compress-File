@@ -9,7 +9,7 @@ Proyek ini adalah aplikasi desktop berbasis Python dan Qt6 untuk mengompresi fil
 ![Status](https://img.shields.io/badge/status-stable-brightgreen.svg)
 ![Status](https://img.shields.io/badge/status-development-orange.svg)
 
-- Teknologi Utama = Python, Qt6 (Melalui PySide6), dan Pillow
+- Teknologi Utama =
 ![tech](https://img.shields.io/badge/code-Python-blue?logo=python&logoColor=white)
 ![Qt6](https://img.shields.io/badge/framework-Qt6-41CD52?logo=qt&logoColor=white&style=for-the-badge)
 ![Pillow](https://img.shields.io/badge/library-Pillow-3776AB?logo=python&logoColor=white&style=for-the-badge)
