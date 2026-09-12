@@ -15,4 +15,4 @@ A Python and Qt6-based desktop application designed to simplify the process of c
 - Pillow Library ![Pillow](https://img.shields.io/badge/library-Pillow-3776AB?logo=python&logoColor=white)
 
 ### Binary Releases
-Releases available for Ubuntu/Debian-based Operating System only. Check [Releases](https://github.com/Hattaakim/Compress-Photo/releases) to download the latest version.
+Releases available for Windows and Ubuntu/Debian-based Operating System. Check [Releases](https://github.com/Hattaakim/Compress-Photo/releases) for more information about the latest version.
