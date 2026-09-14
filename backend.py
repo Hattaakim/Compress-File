@@ -1,6 +1,86 @@
-import os, filetype
-from multiprocessing import Queue
+import os
+from PySide6.QtSql import QSqlDatabase, QSqlQuery
 from PIL import Image
+
+class fileDatabase:
+    def __init__(self):
+        self.fileDatabase = QSqlDatabase.addDatabase("QSQLITE")
+        self.fileDatabase.setDatabaseName(":memory:")
+        self.fileDatabase.open()
+
+        self.dbQuery = QSqlQuery(db=self.fileDatabase)
+        self.qCreateTable = [
+"""CREATE TABLE IF NOT EXISTS fileTable(
+id INTEGER PRIMARY KEY,
+fileName TEXT NOT NULL,
+fileDir TEXT NOT NULL)""",
+
+"""CREATE TABLE IF NOT EXISTS fileVerify(
+id INTEGER PRIMARY KEY,
+fileName TEXT,
+fileExt TEXT DEFAULT '-',
+fileFormat TEXT DEFAULT '-',
+fileSize FLOAT DEFAULT 0.00,
+isSupported INTEGER DEFAULT 0,
+isNotCorrupted INTEGER DEFAULT 0,
+isNotVirus INTEGER DEFAULT 0,
+filePath TEXT)""",
+
+"""CREATE TABLE IF NOT EXISTS fileProcess(
+id INTEGER PRIMARY KEY,
+fileName TEXT,
+fileStatus INTEGER DEFAULT 0,
+fileSize0 FLOAT DEFAULT 0.00,
+fileSize1 FLOAT DEFAULT 0.00,
+sizeReduced FLOAT DEFAULT 0.00,
+fileSavePath TEXT DEFAULT '-',
+fileDeleted INTEGER DEFAULT 0)""",
+
+"""CREATE TRIGGER IF NOT EXISTS fileDir_Inserted
+AFTER INSERT ON fileTable
+BEGIN
+    INSERT INTO fileVerify(fileName, filePath)
+    VALUES (NEW.fileName, NEW.fileDir);
+END;""",
+
+"""CREATE TRIGGER IF NOT EXISTS fileVerify_Inserted
+AFTER INSERT ON fileVerify
+BEGIN
+    INSERT INTO fileProcess(fileName)
+    VALUES (NEW.fileName);
+END;""",
+
+"""CREATE TRIGGER IF NOT EXISTS fileVerify_SizeUpdated
+AFTER UPDATE OF fileSize on fileVerify
+BEGIN
+    UPDATE fileProcess
+    SET fileSize0 = NEW.fileSize
+    WHERE fileName = NEW.fileName;
+END;"""
+        ]
+        for qSql in self.qCreateTable:
+            self.dbQuery.exec(qSql)
+        print(self.dbQuery.lastError().text())
+
+    def runQuery(self, querySQL, params=None, fetch=False):
+        """params for VALUES (?,?) and FETCH for return data"""
+        self.dbQuery.prepare(querySQL)
+        if params:
+            for param in params:
+                self.dbQuery.addBindValue(param)
+
+        if not self.dbQuery.exec():
+            raise Exception(f"QSqlError: {self.dbQuery.lastError().text()}")
+
+        if fetch:
+            hasil = []
+            while self.dbQuery.next():
+                row = tuple(self.dbQuery.value(i)
+                            for i in range(self.dbQuery.record().count()))
+                hasil.append(row)
+            return hasil
+        else:
+            return True
 
 def verifyImageFile(filePath):
     """return nama file, ukuran awal, ekstensi file, format file, dukungan, tidak corrupt, bukan virus (0 uncheck 1 true 2 false)"""
@@ -56,9 +136,10 @@ def verifyImageFile(filePath):
     if imgPtr:
         imgPtr.close()
         del imgPtr
-    return (namaFile, ukuranAwal, ekstensiFile, formatFile, dukunganFile, tidakCorrupt, bukanVirus)
+    return (namaFile, ekstensiFile, formatFile, ukuranAwal, dukunganFile, tidakCorrupt, bukanVirus)
 
 def returnAllFileFromPath(dirs:os.PathLike, conn):
+    """Return a list of file from a dir, also verify is file exists and file in valid image extension"""
     allFile = []
     validExt = [".jpg", ".jpeg", ".png"]
     for root, _, files in os.walk(dirs):

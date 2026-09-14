@@ -63,7 +63,7 @@ def compressImage(fPath, outDir: os.PathLike,
             except (FileNotFoundError, PermissionError, OSError, IsADirectoryError):
                 fileDeleted = 2
 
-        return(namaFile, fileSizeAkhir, penghematanSize, statusKompresi, outPath, fileDeleted)
+        return (namaFile, statusKompresi, fileSizeAkhir, penghematanSize, outPath, fileDeleted)
 
     except Exception as e:
-        return(namaFile, fileSizeAkhir, penghematanSize, statusKompresi, outPath, fileDeleted)
+        return (namaFile, statusKompresi, fileSizeAkhir, penghematanSize, outPath, fileDeleted)
